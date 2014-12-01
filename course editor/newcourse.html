@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="comments">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>MindScroll LMS |  LearnZippy </title>
+		<link rel="stylesheet" href="css/style.css">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			body {
+				color:#212121;
+				background:#FFFFFF;
+			}
+
+			.header{
+				background:#FFFFFF;
+			}
+
+			.navbar,.navbar-right,.navbar ul li a, .navbar-brand,.navbar-nav>li>.dropdown-menu {
+				color:777777 !important; 
+				background:#F8F8F8 !important;
+			}
+
+			.navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,.navbar-brand:hover,.dropdown-menu>li>a:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+				color: #FFFFFF !important;
+				background:#00AADA !important;
+			}
+			.navbar-default{
+				margin-bottom: 0px;
+			}
+			.navbar-fixed-top{
+				transition: all 0.4s ease;margin-bottom: 20px;
+			}
+		</style>
+			
+		<link href="http://oss.maxcdn.com/summernote/0.5.1/summernote.css" rel="stylesheet" />
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="css/datepicker.css" rel="stylesheet">
+
+
+		<style type="text/css">
+			.img-responsive{display: -webkit-inline-box; height: 100px;}
+			.course_types{margin: 0;  padding: 10px 15px;}
+			.r1{margin:15px 0px;; float: left; width: 100%; border:1px solid #ccc;}
+			.bg-success{height:80px !important; float:left;}
+		</style>
+
+	</head>
+	<body ng-controller = 'commentsController'>
+		<div class="container header">
+			<a href="http://localhost/lms/index.php"><img alt="logo" class="logo" src="img/logo.png"/></a>
+		</div>
+	  <!-- navbar -->
+	  
+		<nav class="navbar navbar-default" role="navigation"> 
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+						<span class="icon-bar"></span><span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="http://localhost/lms/index.php" style="padding-right:15px;padding-left:15px;"><span class="glyphicon glyphicon-home"></span></a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" class="disabled"><span class="glyphicon glyphicon-bell"><span></a>
+						</li>
+						
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-user"></span>LearnZippy 
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="http://localhost/lms/index.php/user/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+								<li><a href="http://localhost/lms/index.php/user/theme"><span class="glyphicon glyphicon-picture"></span> Theme</a></li>
+								<li><a href="http://localhost/lms/index.php/user/setting"><span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+								<li class="divider"></li>
+								<li><a href="http://localhost/lms/index.php/logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- navbar end -->
+		<div class="container" style="margin-top:20px;">
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="col-sm-3 col-md-3">
+					<ol class="breadcrumb">
+						<li><a href="http://localhost/lms/index.php">Home</a></li>
+						<li class="active"><a href="#">MindScroll LMS</a></li>
+					</ol>
+								
+					<div class="col-md-12 panel-group" id="accordion" style="margin:0px;padding:0px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#course">Course</a>
+								</h4>
+							</div>
+							<div id="course" class="panel-collapse collapse">
+								<div class="panel-body" style="padding:0px;">
+									<ul class="nav nav-pills nav-stacked">
+										<li id="course.create"><a href="http://localhost/lms/index.php/course/create">New</a></li>
+										<li id="course.index"><a href="http://localhost/lms/index.php/course">Manage</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#content">Content</a>
+								</h4>
+							</div>
+							<div id="content" class="panel-collapse collapse">
+								<div class="panel-body" style="padding:0px;">
+									<ul class="nav nav-pills nav-stacked">
+										<li id="document.index"><a href="http://localhost/lms/index.php/document">Manage Documents</a></li>
+										<li id="video.index"><a href="http://localhost/lms/index.php/video">Manage Videos</a></li>
+										<li id="questionpaper.index"><a href="http://localhost/lms/index.php/questionpaper">Manage Question Papers</a></li>
+										<li id="scormpackage.index"><a href="http://localhost/lms/index.php/scormpackage">Manage SCORM</a></li>
+										<li id="webresource.index"><a href="http://localhost/lms/index.php/webresource">Manage Weblink</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#user">User</a>
+								</h4>
+							</div>
+							<div id="user" class="panel-collapse collapse">
+								<div class="panel-body" style="padding:0px;">
+									<ul class="nav nav-pills nav-stacked">
+										<li id="user.manage"><a href="http://localhost/lms/index.php/user/manage">User Manage</a></li>
+										<li id="usergroup.manage"><a href="http://localhost/lms/index.php/usergroup/manage">User Group Manage</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>  
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#analytics">Analytics</a>
+								</h4>
+							</div>
+							<div id="analytics" class="panel-collapse collapse">
+								<div class="panel-body" style="padding:0px;">
+								<ul class="nav nav-pills nav-stacked">
+									<li id="analytics.dashboard"><a href="http://localhost/lms/index.php/analytics/dashboard">Dashboard</a></li>
+									<li id="analytics.user"><a href="http://localhost/lms/index.php/analytics/user">User</a></li>
+									<li id="analytics.course"><a href="http://localhost/lms/index.php/analytics/course">Course</a></li>
+									<li id="analytics.asset"><a href="http://localhost/lms/index.php/analytics/asset">Asset</a></li>
+								</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Sidebar end -->
+				<div class="col-sm-9 col-md-9">
+					<div id="notification_alerts"></div>
+					
+			
+					<div class="col-sm-12 col-md-12" style="padding:0;">
+				
+			
+						<div class="row r1">
+							
+							<div class="col-md-6" style="border-right: 1px solid #ccc;  padding: 0;">
+								<h5 id="course_type" class="text-center course_types">Course Type : Open</h5>
+								
+								<div id="course_type2" class="btn-group btn-group-xs col-md-offset-2" data-toggle="buttons" style="padding:7px;">
+									<label class="btn btn-primary" ng-click = "course_type($event)">
+										<input type="radio" name="options" id="option1" value="Compulsory" autocomplete="off" /> Compulsory
+									</label>
+									<label class="btn btn-primary active" ng-click = "course_type($event)">
+										<input type="radio" name="options" id="option2" value="Open" autocomplete="off" checked /> Open
+									</label>
+									<label class="btn btn-primary" ng-click = "course_type($event)">
+										<input type="radio" name="options" id="option3" value="Recommended" autocomplete="off" /> Recommended
+									</label>
+									<label class="btn btn-primary" ng-click = "course_type($event)">
+										<input type="radio" name="options" id="option3" value="Invite Only" autocomplete="off" /> Invite Only
+									</label>
+								</div>
+								
+							</div>
+							
+							<div class="col-md-3" style="border-right: 1px solid #ccc;  padding: 0;">
+								<h5 class="text-center course_types">Validity</h5>
+								<div id="datepicker" class="input-daterange input-group col-sm-10 col-sm-offset-1" style=" padding: 3px">
+									<input type="text" name="start" id="start_date" class="input-sm form-control" ng-model="confirmed1" ng-change="change1()"/>
+									<span class="input-group-addon">to</span>
+									<input type="text" name="end" id="end_date" class="input-sm form-control" ng-model="confirmed" ng-change="change()"/>
+								</div>
+							</div>
+								
+							<div class="col-md-3" style=" padding: 0;">
+								<h5 id="course_type3" class="text-center course_types">Visiblity: Draft</h5>
+								
+								<div id="course_type4" class="btn-group btn-group-xs col-md-offset-3" data-toggle="buttons" style=" padding: 7px;">
+									<label class="btn btn-primary" ng-click = "visibility_course($event)">
+										<input type="radio" name="options1" id="option1" value="Active" autocomplete="off" /> Active
+									</label>
+									<label class="btn btn-primary active" ng-click = "visibility_course($event)">
+										<input type="radio" name="options1" id="option2" value="Draft" autocomplete="off" checked /> Draft
+									</label>
+								</div>
+							</div>
+								
+						</div>
+				
+						<form role="form" class="form-horizontal" accept-charset="UTF-8" action="http://localhost/lms/index.php/course" method="POST">
+
+							<div class="row">
+							
+								<div style="padding:5px 0px;" class="col-sm-12 input-group">
+									<div class="col-sm-1">
+										<label class="control-label" for="Title">Title</label>
+										<input type="hidden" value="1" name="course_id" class="id">
+									</div>
+									
+									<div class="col-sm-11">
+										<input type="text" value="" name="title" required="required" class="form-control">
+									</div>
+									
+								</div>
+								
+								<div style="padding:5px 0px;" class="col-sm-12 input-group">
+									<div class="col-sm-1">
+										<label class="control-label" for="Course Intro">Course Intro</label>
+									</div>
+									
+									<div class="col-sm-11">
+										<textarea cols="50" name="description" id="summernote" rows="18" class="input-block-level" style="display: none;"></textarea>
+									</div>
+									
+								</div>
+								
+							</div><!-- /.row -->
+
+							<div class="row">
+								<div style="padding:5px 0px; margin-left:50px;" class="btn-group col-sm-11 col-sm-offset-1">
+									<a role="button" class="btn btn-default disabled" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+									<a value="0" data-target="#document_modal" data-toggle="modal" id="document" href="#" class="btn btn-primary content as"><span class="glyphicon glyphicon-book"></span> Document</a>
+									<a value="0" data-target="#video_modal" data-toggle="modal" id="video" href="#" class="btn btn-primary content as"><span class="glyphicon glyphicon-play-circle"></span> Video</a>
+									<a value="0" data-target="#questionpaper_modal" data-toggle="modal" id="questionpaper" href="#" class="btn btn-primary content as"><span class="glyphicon glyphicon-list-alt"></span> Question Paper</a>
+									<a value="0" data-target="#scormpackage_modal" data-toggle="modal" id="scormpackage" href="#" class="btn btn-primary content as"><span class="glyphicon glyphicon-folder-close"></span> SCORM Package</a>
+									<a value="0" data-target="#webresource_modal" data-toggle="modal" id="webresource" href="#" class="btn btn-primary content as"><span class="glyphicon glyphicon-cloud"></span> Web Link</a>
+								</div>
+							</div>
+						 
+							<div class="row"  style="padding:15px;">
+								<div id="sortable" class="ui-sortable">
+									
+									<div id="inputfield" class="form-horizontal" style="height: 100%; float: left; width: 100%; margin-bottom:30px;" ng-repeat="phone in phones">
+										<div class="col-md-1 col-sm-1 col-xs-1">
+											<h2 id="71" style="margin:0; padding: 21px 0px;" class="glyphicon glyphicon-folder-close"></h2>
+										</div>
+										
+										<div class="col-md-11 col-sm-11 col-xs-11" style="padding:0; border:1px solid #ccc;">
+											<input type="hidden" value="" name="{{phone.type}}|{{phone.id}}|1" id="h1" class="id" />
+											<p id="html71" style="float:left; width:94.1%; margin: 0px 10px;">{{phone.name}}</p>
+											<button class="close" id="close" type="button" style="padding-right: 5px; padding-left: 5px;">
+												<span aria-hidden="true">×</span>
+												<span class="sr-only">Close</span>
+											</button>
+											
+											<div class="col-md-12 col-xs-12 col-sm-12" style="border-top:1px solid #eee;">
+												<div class="col-md-4 col-xs-12 col-sm-12" style="border-right: 1px solid #ccc; padding: 0px;">
+													<h6 id="course_type51" class="text-left" style="float:left; padding: 7px">Visiblity :{{phone.visibility}}</h6>
+													<div id="course_type61" class="btn-group btn-group-xs" data-toggle="buttons" style="margin-bottom: 2px; float:left; padding:13px;">
+														<label class="btn btn-primary" ng-click = "visibility($event)">
+															<input type="radio" name="options1" id="option1" value="Active" autocomplete="off" style="width: 100%;"/> Active
+														</label>
+														
+														<label class="btn btn-primary active" ng-click = "visibility($event)">
+															<input type="radio" name="options1" id="option2" value="Draft" autocomplete="off" checked="" style="width: 100%;"/> Draft
+														</label>
+													</div>
+												</div>
+												
+												<div class="col-md-5 col-xs-12 col-sm-12" style="border-right: 1px solid #ccc; padding-top:5px;">
+													<h6 class="text-left" style="float:left; padding: 6px">Validity</h6>
+													<div id="datepicker" class="input-daterange input-group col-sm-8" style="float:left; padding: 7px;">
+														<input type="text" id="start_date11" name="start1" class="input-sm form-control" ng-model = "startdate" ng-click = "start_click($event)" ng-change = "startdate1(startdate)"/>
+														<span class="input-group-addon">to</span>
+														<input type="text" name="end1" id="end_date11" class="input-sm form-control" ng-model = "enddate" ng-click = "end_click($event)" ng-change = "enddate1(enddate)"/>
+													</div>
+												</div>
+												
+												<div class="col-md-3 col-xs-12 col-sm-12" style="padding-top:5px; ">
+													<select name="content_prerequisite[1]" id="prerequisite1" ng-click="prerequisite_click($event)" ng-model = "prerequisite" ng-change = "prerequisite1(prerequisite)" class="form-control" style="float: left; width: 121px; padding:0px; margin-top: 6px;">
+														<option selected="selected" disabled="">--Prerequisite--</option>
+														<option value="None">None</option>
+														<option value="Just Above">Just Above</option>
+														<option value="All of the Above">All of the Above</option>
+														<option value="Locked">Locked</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						
+							<div class="col-sm-offset-1 col-sm-11">
+								<div class="pull-right">
+									<input type="submit" value="Save" class="btn btn-primary">
+								</div>
+							</div>
+						</form> 
+
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="document_modal" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Add Document from Library</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			
+			 
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="video_modal" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Add Video from Library</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			
+			 
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="questionpaper_modal" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Add Question Paper from Library</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-list-alt"></span>
+												</h2>
+												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" ng-click = "clip($event)">Introduction to the...</a>
+											</div>
+										</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			
+			 
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="scormpackage_modal" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Add SCORM Package from Library</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" ng-click = "clip($event)">Introduction to the...</a>
+											</div>
+											
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="2" value="Getting Started with the Incident Manage." class="selecteddata" href="#" ng-click = "clip($event)">Getting Started with...</a>
+											</div>
+											
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="3" value="Working with the Incident Management System." class="selecteddata" href="#" ng-click = "clip($event)">Working with the Inc...</a>
+											</div>
+											
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="4" value="Advanced Features of the Incident Manage." class="selecteddata" href="#" ng-click = "clip($event)">Advanced Features of...</a>
+											</div>
+											
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="5" value="Additional Tasks Performed by Using the." class="selecteddata" href="#" ng-click = "clip($event)">Additional Tasks Per...</a>
+											</div>
+											
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="6" value="Incident Browser and Reports." class="selecteddata" href="#" ng-click = "clip($event)">Incident Browser and...</a>
+											</div>
+
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="7" value="Insurance Contract Basics." class="selecteddata" href="#" ng-click = "clip($event)">Insurance Contract B...</a>
+											</div>
+
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="8" value="Principles of General Insurance" class="selecteddata" href="#" ng-click = "clip($event)">Principles of Genera...</a>
+											</div>
+
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="9" value="Course 1" class="selecteddata" href="#" ng-click = "clip($event)">Course 1</a>
+											</div>
+
+											<div class="col-md-3 text-center">
+												<h2 style="height:100px;">
+													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
+												</h2>
+												<a data-dismiss="modal" id="10" value="Snapdeal Dress Code Policy" class="selecteddata" href="#" ng-click = "clip($event)">Snapdeal Dress Code...</a>
+											</div>
+
+										</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			
+			 
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="webresource_modal" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Add Web Link from Library</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+																</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+			<div class="container">
+				<p class="text-muted text-right">Powered by <a href="http://www.mindscroll.com">MindScroll</a></p>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+		  
+			$activepage = $('#');
+			$activepage.addClass('active');
+			$activepage.parent().parent().parent().addClass('in');
+			$(function(){
+				var
+				$win = $(window),
+				$filter = $('.navbar'),
+				$filterSpacer = $('<div />', {
+					"class": "filter-drop-spacer",
+					"height": $filter.outerHeight()
+				});
+				$win.scroll(function(){
+					if(!$filter.hasClass('navbar-fixed-top') && $win.scrollTop() > $filter.offset().top){
+						$filter.before($filterSpacer);
+						$filter.addClass("navbar-fixed-top");
+					} else if ($filter.hasClass('navbar-fixed-top')  && $win.scrollTop() < $filterSpacer.offset().top){
+						$filter.removeClass("navbar-fixed-top");
+						$filterSpacer.remove();
+					}
+				});
+			});
+		</script>
+
+		<!-- start Mixpanel -->
+		<script type="text/javascript">
+			(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+			for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+			  mixpanel.init("a16b048a400b875fcf6cdf02e9429875");
+
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)
+			},
+			i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-11399909-1', 'mindscroll.com');
+			ga('send', 'pageview');
+
+			mixpanel.track("Untracked Route");
+			
+			mixpanel.people.increment("pageviews");
+		</script>
+		
+		<script type="text/javascript">
+			function createAutoClosingAlert(selector, delay) {
+			   window.setTimeout(function() { $(selector).remove() }, delay);
+			}
+			function notifications(text, type, delay){
+				check = $('#notification_alerts').children().length;
+				if(type == undefined){
+					type = 'info';
+				}
+				$('#notification_alerts').prepend('<div id="notification_alert'+check+'"><div class="alert alert-'+type+' alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+text+'</div></div>');
+				if(delay != undefined || 0){
+					createAutoClosingAlert('#notification_alert'+check+'', delay*1000);
+				}
+			}
+		</script>
+		
+		
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="http://oss.maxcdn.com/summernote/0.5.1/summernote.min.js"></script>
+		<script src="js/bootstrap-datepicker.min.js"></script>
+		<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+		
+		<script type="text/javascript">
+			$(function(){
+				$('.input-daterange').datepicker({
+					format: "dd/mm/yyyy",
+					weekStart: 1,
+					todayBtn: true,
+					todayHighlight: true
+				});
+			});
+			
+			$('#summernote').summernote({height:100});
+
+		</script>
+		
+		<script>
+		
+			var comments = angular.module('comments', []);
+			comments.controller('commentsController', function($scope, $http, $element) {
+				
+				$scope.phones = [
+					{'name': 'Additional Tasks Performed by Using the Incident Management System',
+					 'visibility': 'Draft',
+					 'type': 'Scrompackage',
+					 'id': '1'}
+				];
+				
+				$('.modal').on('show.bs.modal', function (e) {
+
+					selectedtype = $(this).attr('id').replace('_modal', '');
+					invoker = e.relatedTarget.id;
+					selectedsource = e.relatedTarget.classList;
+					
+					console.log(selectedtype);
+					console.log(invoker);
+					console.log(selectedsource);
+					
+					$scope.clip = function($event) {
+						
+						var asset_id_a = angular.element($event.target).attr('id');
+						
+						$http.post('').
+						success(function(data, status, headers, config) {
+						
+							console.log('1112');
+							$scope.phones.push({
+							
+								name: 'name',
+								visibility: 'Draft',
+								type: selectedtype,
+								id: asset_id_a
+							});
+							
+							$scope.visibility = function($event){
+							
+								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+								var res1 = res.split("|");
+								var asset_id = res1[1];
+								var asset_type = res1[0];
+								var visibility = angular.element($event.target).children().val();
+								console.log('Asset Type: ' + asset_type + ', Asset id: ' + asset_id + ', Visiblity : ' + visibility );
+								angular.element($event.target).parent().parent().parent().find('#course_type51').html('Visiblity : ' + visibility );
+							
+							}
+							
+							$scope.prerequisite_click = function($event){
+								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+								var res1 = res.split("|");
+								var asset_id = res1[1];
+								var asset_type = res1[0];
+								$scope.prerequisite1 = function(prerequisite){
+									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Prerequisite:- ' + prerequisite);
+								}
+							}
+							
+							$scope.start_click = function($event){
+								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+								var res1 = res.split("|");
+								var asset_id = res1[1];
+								var asset_type = res1[0];
+								$scope.startdate1 = function(startdate){
+									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Start Date:- ' + startdate);
+								}
+							}
+							
+							$scope.end_click = function($event){
+								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+								var res1 = res.split("|");
+								var asset_id = res1[1];
+								var asset_type = res1[0];
+								$scope.enddate1 = function(enddate){
+									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', End Date:- ' + enddate);
+								}
+							}
+						
+						}).
+						error(function(data, status, headers, config) {
+							console.log('3');
+						});
+					
+					}
+					
+				});
+				
+				$scope.visibility = function($event){
+				
+					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+					var res1 = res.split("|");
+					var asset_id = res1[1];
+					var asset_type = res1[0];
+					var visibility = angular.element($event.target).children().val();
+					console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Visiblity : ' + visibility );
+					angular.element($event.target).parent().parent().parent().find('#course_type51').html('Visiblity : ' + visibility );
+				
+				}
+				
+				$scope.start_click = function($event){
+					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+					var res1 = res.split("|");
+					var asset_id = res1[1];
+					var asset_type = res1[0];
+					$scope.startdate1 = function(startdate){
+						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Start Date:- ' + startdate);
+					}
+				}
+				
+				$scope.prerequisite_click = function($event){
+					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+					var res1 = res.split("|");
+					var asset_id = res1[1];
+					var asset_type = res1[0];
+					$scope.prerequisite1 = function(prerequisite){
+						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Prerequisite:- ' + prerequisite);
+					}
+				}
+				
+				$scope.end_click = function($event){
+					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
+					var res1 = res.split("|");
+					var asset_id = res1[1];
+					var asset_type = res1[0];
+					$scope.enddate1 = function(enddate){
+						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', End Date:- ' + enddate);
+					}
+				}
+				
+				$scope.change = function(){
+					console.log('End Date :- ' + $scope.confirmed);
+				}
+				
+				$scope.change1 = function(){
+					console.log('Start Date :- ' + $scope.confirmed1);
+				}
+				
+				$scope.course_type = function($event){
+					
+					var course_type = angular.element($event.target).children().val();
+					angular.element($event.target).parent().parent().parent().find('#course_type').html('Course Type : ' + course_type );
+					console.log('Course Type : ' + course_type );
+				}
+				
+				$scope.visibility_course = function($event){
+					
+					var visibility_course = angular.element($event.target).children().val();
+					angular.element($event.target).parent().parent().parent().find('#course_type3').html('Visiblity : ' + visibility_course );
+					console.log('Visiblity : ' + visibility_course );
+				}
+				
+			});
+			
+			$("#sortable").sortable({
+				forcePlaceholderSize: true,
+				placeholder: "bg-success",
+				cursor: "move",
+				stop: function(){
+					size = $(this).parent().children("#sortable").children().size();
+					for (var j = 1; j < size+1; j++) {
+						position= 'div'+':nth-child('+j+')';
+						oldid =$('#sortable').children(position).find('.id').attr('name');
+						newid = oldid.replace(oldid.match(/[(0-9)]+/g),j);
+						var res = oldid.split("|");
+						$("#sortable").children(position).find('.id').attr('name',newid);
+						$("#sortable").children(position).find('.id').attr('name',res[0] + '|' + res[1] +'|' + j);
+						console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j);
+					}
+				}
+			});
+			
+			$(document).on("click", "#close", function(){
+				$(this).parents('#inputfield').remove();
+				size = $('#sortable').children().size();      //This is awesome
+				
+				for (var j = 1; j < size+1; j++) {
+					position= 'div'+':nth-child('+j+')';
+					oldid =$('#sortable').children(position).find('.id').attr('name');
+					newid = oldid.replace(oldid.match(/[(0-9)]+/g),j);
+					var res = oldid.split("|");
+					$("#sortable").children(position).find('.id').attr('name',res[0] + '|' + res[1] +'|' + j);
+					console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j);
+				}
+			});
+			
+			
+		</script>
+
+	</body>
+</html>
