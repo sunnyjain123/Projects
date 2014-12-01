@@ -1,0 +1,630 @@
+<!doctype>
+<html>
+	<head>
+		<title>Course Enrollment</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<style>
+			.height{height:100%; border-top:0; border-right: 0; border-bottom: 0}
+		</style>
+	</head>
+
+	<body>
+	<div class="container" style="padding:20px;">
+		<div class="row">
+			<div class="col-sm-12 col-md-12">
+				<div style="margin-bottom:15px;" class="btn-group pull-right">
+					<span style="border:none;" class="btn btn-default" type="button">Course</span>
+					<button class="btn btn-default" type="button">Curricullum</button>
+					<button class="btn btn-default" type="button">Settings</button>
+					<button class="btn btn-primary" type="button">Enrollments</button>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<form role="form" class="form-inline" accept-charset="UTF-8" method="POST">
+							<div style="margin-bottom:15px;" class="btn-group">
+								<span style="border:none;" type="button"> Enroll User Group</span>
+								<select name="existing" class="form-control">
+									<option disabled=""> Select User Group</option>
+									<option>group1</option>
+									<option>group2</option>
+								</select>
+								<input type="submit" value="Add" class="btn btn-primary pull-right">
+							</div>
+						</form>             
+					</div>
+				</div>
+			
+				<div class="row" style="border:1px solid #428bca;">
+					
+					<div class="col-md-3" style="padding:0" id="droppable">
+						<ul class="nav nav-pills nav-stacked" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#home" role="tab" data-toggle="tab">Group1</a>
+							</li>
+							<li role="presentation">
+								<a href="#profile" role="tab" data-toggle="tab">Group2</a>
+							</li>
+							<li role="presentation">
+								<a href="#messages" role="tab" data-toggle="tab">Group3</a>
+							</li>
+							<li role="presentation">
+								<a href="#settings" role="tab" data-toggle="tab">Group4</a>
+							</li>
+							<li role="presentation">
+								<a href="#home1" role="tab" data-toggle="tab">Group5</a>
+							</li>
+							<li role="presentation">
+								<a href="#profile1" role="tab" data-toggle="tab">Group6</a>
+							</li>
+							<li role="presentation">
+								<a href="#messages1" role="tab" data-toggle="tab">Group7</a>
+							</li>
+							<li role="presentation">
+								<a href="#settings1" role="tab" data-toggle="tab">Group8</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="tab-content col-md-9 height" style="padding:0;">
+						<div role="tabpanel" class="tab-pane active height" id="home">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="profile">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td>
+													
+												</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="messages">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden" value="w3jggQjjtMUO715cykQYwlc2NIxMPQSjvx6YoeKU" name="_token" />
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="settings">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td>
+													
+												</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="home1">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="profile1">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td>
+													
+												</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td>
+																		</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="messages1">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden" value="w3jggQjjtMUO715cykQYwlc2NIxMPQSjvx6YoeKU" name="_token" />
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div role="tabpanel" class="tab-pane height" id="settings1">
+							<div class="panel panel-primary height" style="margin:0;" id="inventor">
+								<div class="panel-heading">
+									<h3 class="panel-title">Users</h3>
+									  
+								</div>
+									
+								<div class="panel-body">
+									<div style="display:none;" id="panel-body">
+										<input type="text" placeholder="Filter Users" data-filters="#dev-table" data-action="filter" id="dev-table-filter" class="form-control">
+									</div>
+									
+									<table id="dev-table" class="table table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" class="selectall"> All</th>
+												<th>Name</th>
+												<th>Email ID</th>
+												<th>User Groups</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<form role="form" class="form-inline" accept-charset="UTF-8" action="http://localhost/lms/index.php/course/1/userenrollments" method="POST">
+											</form>
+											<input type="hidden"/>
+											
+											<tr>
+												<td><input type="checkbox" id="3" class="case" value="3" name="active_enrolled[0]" checked="checked"></td>
+												<td>LearnZippy </td>
+												<td>admin@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="4" class="case" value="4" name="active_enrolled[1]"></td>
+												<td>LearnZippy </td>
+												<td>user@learnzippy.com</td>
+												<td></td>
+											</tr>
+											
+											<tr>
+												<td><input type="checkbox" checked="" id="5" class="case" value="5" name="active_enrolled[2]"></td>
+												<td>Learn Zippy</td>
+												<td>demo@learnzippy.com</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<div class="form-group pull-right">
+										<button class="btn btn-primary" type="butubmitton">Enroll</button>
+										<p class="text-muted">Select Users to Enroll</p>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+					
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+
+			var c = {};
+			var id2 = 0;
+
+			$("#inventor tr").draggable({
+				helper: "clone",
+				start: function(event, ui) {
+					c.tr = this;
+					c.helper = ui.helper;
+					c.html = $(this).html();
+				}
+			});
+
+			$("#droppable li").droppable({
+				drop: function(event, ui) {
+					var id = $(this).children().attr('href');
+					console.log(id);
+					$(id).children().find('tbody').append('<tr id="html" class="ui-draggable ui-draggable-handle"></tr>');
+					$('#html').attr('id', 'html' + id2++)
+					console.log(id2);
+					var id3 = id2 - 1;
+					$('#html' + id3).append($(c.html));
+					$('#html' + id3).draggable({
+						helper: "clone",
+						start: function(event, ui) {
+							c.tr = this;
+							c.helper = ui.helper;
+							c.html = $(this).html();
+						}
+					});
+					$("#droppable li").droppable({
+						drop: function(event, ui) {
+							var id = $(this).children().attr('href');
+							console.log(id);
+							$(id).children().find('tbody').append('<tr id="html" class="ui-draggable ui-draggable-handle"></tr>');
+							$('#html').attr('id', 'html' + id2++)
+							console.log(id2);
+							var id3 = id2 - 1;
+							$('#html' + id3).append($(c.html));
+							$('#html' + id3).draggable({
+								helper: "clone",
+								start: function(event, ui) {
+									c.tr = this;
+									c.helper = ui.helper;
+									c.html = $(this).html();
+								}
+							});
+							$(c.tr).remove();
+							$(c.helper).remove();
+						}
+					});
+					$(c.tr).remove();
+					$(c.helper).remove();
+				}
+			});
+
+		});
+
+	</script>
+	
+	</body>
+</html>
