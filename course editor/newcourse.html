@@ -16,6 +16,18 @@
 			.header{
 				background:#FFFFFF;
 			}
+			
+			#hov:hover{
+				cursor:pointer;
+				background:#AD4543 !important;
+				transition: all .2s ease 0s;
+			}
+			
+			#showh:hover{
+				cursor:pointer;
+				background:#D8D8D8 !important;
+				transition: all .5s ease 0s;
+			}
 
 			.navbar,.navbar-right,.navbar ul li a, .navbar-brand,.navbar-nav>li>.dropdown-menu {
 				color:777777 !important; 
@@ -32,6 +44,90 @@
 			.navbar-fixed-top{
 				transition: all 0.4s ease;margin-bottom: 20px;
 			}
+			
+			.timeline {
+				list-style: none;
+				padding: 20px 0 20px;
+				position: relative;
+			}
+			.timeline:before {
+				top: 0;
+				bottom: 0;
+				position: absolute;
+				content: " ";
+				width: 3px;
+				background-color: #eeeeee;
+				right: 25px;
+				margin-left: -1.5px;
+			}
+			.timeline > li {
+				margin-bottom: 20px;
+				position: relative;
+			}
+			.timeline > li:before,
+			.timeline > li:after {
+				content: " ";
+				display: table;
+			}
+			.timeline > li:after {
+				clear: both;
+			}
+			.timeline > li:before,
+			.timeline > li:after {
+				content: " ";
+				display: table;
+			}
+			.timeline > li:after {
+				clear: both;
+			}
+			.timeline > li > .timeline-panel {
+				width: calc( 100% - 75px );
+				float: left;
+				border: 1px solid #d4d4d4;
+				border-radius: 2px;
+				padding: 20px;
+				position: relative;
+				-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+				box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+			}
+			.timeline > li > .timeline-panel:before {
+				position: absolute;
+				top: 26px;
+				right: -15px;
+				display: inline-block;
+				content: " ";
+			}
+			.timeline > li > .timeline-panel:after {
+				position: absolute;
+				top: 27px;
+				right: -14px;
+				display: inline-block;
+				content: " ";
+			}
+			.timeline > li > .timeline-badge {
+				color: #fff;
+				width: 50px;
+				height: 50px;
+				line-height: 50px;
+				font-size: 1.4em;
+				text-align: center;
+				position: absolute;
+				top: 16px;
+				right: 0px;
+				margin-left: -25px;
+				background-color: #999999;
+				z-index: 100;
+				border-radius: 50%;
+			}
+			.timeline > li > .timeline-badge:hover {
+				cursor:pointer;
+			}
+			.timeline-badge.danger {
+				background-color: #d9534f !important;
+			}
+			.timeline-badge.primary {
+				background-color: #10ADF5 !important;
+			}
 		</style>
 			
 		<link href="http://oss.maxcdn.com/summernote/0.5.1/summernote.css" rel="stylesheet" />
@@ -43,7 +139,8 @@
 			.img-responsive{display: -webkit-inline-box; height: 100px;}
 			.course_types{margin: 0;  padding: 10px 15px;}
 			.r1{margin:15px 0px;; float: left; width: 100%; border:1px solid #ccc;}
-			.bg-success{height:80px !important; float:left;}
+			.r2{margin:15px 0px;; float: left; width: 100%; border-top:1px solid #ccc;}
+			.bg-success{height:80px !important; float:left; width:741px;}
 		</style>
 
 	</head>
@@ -181,46 +278,67 @@
 							
 							<div class="col-md-6" style="border-right: 1px solid #ccc;  padding: 0;">
 								<h5 id="course_type" class="text-center course_types">Course Type : Open</h5>
-								
-								<div id="course_type2" class="btn-group btn-group-xs col-md-offset-2" data-toggle="buttons" style="padding:7px;">
-									<label class="btn btn-primary" ng-click = "course_type($event)">
-										<input type="radio" name="options" id="option1" value="Compulsory" autocomplete="off" /> Compulsory
-									</label>
-									<label class="btn btn-primary active" ng-click = "course_type($event)">
-										<input type="radio" name="options" id="option2" value="Open" autocomplete="off" checked /> Open
-									</label>
-									<label class="btn btn-primary" ng-click = "course_type($event)">
-										<input type="radio" name="options" id="option3" value="Recommended" autocomplete="off" /> Recommended
-									</label>
-									<label class="btn btn-primary" ng-click = "course_type($event)">
-										<input type="radio" name="options" id="option3" value="Invite Only" autocomplete="off" /> Invite Only
-									</label>
-								</div>
-								
 							</div>
 							
 							<div class="col-md-3" style="border-right: 1px solid #ccc;  padding: 0;">
 								<h5 class="text-center course_types">Validity</h5>
-								<div id="datepicker" class="input-daterange input-group col-sm-10 col-sm-offset-1" style=" padding: 3px">
-									<input type="text" name="start" id="start_date" class="input-sm form-control" ng-model="confirmed1" ng-change="change1()"/>
-									<span class="input-group-addon">to</span>
-									<input type="text" name="end" id="end_date" class="input-sm form-control" ng-model="confirmed" ng-change="change()"/>
-								</div>
 							</div>
 								
 							<div class="col-md-3" style=" padding: 0;">
 								<h5 id="course_type3" class="text-center course_types">Visiblity: Draft</h5>
-								
-								<div id="course_type4" class="btn-group btn-group-xs col-md-offset-3" data-toggle="buttons" style=" padding: 7px;">
-									<label class="btn btn-primary" ng-click = "visibility_course($event)">
-										<input type="radio" name="options1" id="option1" value="Active" autocomplete="off" /> Active
-									</label>
-									<label class="btn btn-primary active" ng-click = "visibility_course($event)">
-										<input type="radio" name="options1" id="option2" value="Draft" autocomplete="off" checked /> Draft
-									</label>
-								</div>
 							</div>
+							
+							<div class="row" id="rowr" style="margin: 0; display:none;">
 								
+								<div class="col-md-6" style="border-right: 1px solid #ccc;  padding: 0;">
+									<div id="course_type2" class="btn-group btn-group-xs col-md-offset-2" data-toggle="buttons" style="padding:7px;">
+										<label class="btn btn-primary" ng-click = "course_type($event)">
+											<input type="radio" name="options" id="option1" value="Compulsory" autocomplete="off" /> Compulsory
+										</label>
+										<label class="btn btn-primary active" ng-click = "course_type($event)">
+											<input type="radio" name="options" id="option2" value="Open" autocomplete="off" checked /> Open
+										</label>
+										<label class="btn btn-primary" ng-click = "course_type($event)">
+											<input type="radio" name="options" id="option3" value="Recommended" autocomplete="off" /> Recommended
+										</label>
+										<label class="btn btn-primary" ng-click = "course_type($event)">
+											<input type="radio" name="options" id="option3" value="Invite Only" autocomplete="off" /> Invite Only
+										</label>
+									</div>
+									
+								</div>
+								
+								<div class="col-md-3" style="border-right: 1px solid #ccc;  padding: 0;">
+									<div id="datepicker" class="input-daterange input-group col-sm-10 col-sm-offset-1" style=" padding: 3px">
+										<input type="text" name="start" id="start_date" class="input-sm form-control" ng-model="confirmed1" ng-change="change1()"/>
+										<span class="input-group-addon">to</span>
+										<input type="text" name="end" id="end_date" class="input-sm form-control" ng-model="confirmed" ng-change="change()"/>
+									</div>
+								</div>
+									
+								<div class="col-md-3" style=" padding: 0;">
+									<div id="course_type4" class="btn-group btn-group-xs col-md-offset-3" data-toggle="buttons" style=" padding: 7px;">
+										<label class="btn btn-primary" ng-click = "visibility_course($event)">
+											<input type="radio" name="options1" id="option1" value="Active" autocomplete="off" /> Active
+										</label>
+										<label class="btn btn-primary active" ng-click = "visibility_course($event)">
+											<input type="radio" name="options1" id="option2" value="Draft" autocomplete="off" checked /> Draft
+										</label>
+									</div>
+								</div>
+									
+							</div>
+							
+							<div class="row r2" style="margin: 0;">
+							
+								<div class="col-md-12 text-center" id="showh">
+								
+									<span class="glyphicon glyphicon-chevron-down"></span>
+								
+								</div>
+							
+							</div>
+							
 						</div>
 				
 						<form role="form" class="form-horizontal" accept-charset="UTF-8" action="http://localhost/lms/index.php/course" method="POST">
@@ -263,56 +381,43 @@
 								</div>
 							</div>
 						 
-							<div class="row"  style="padding:15px;">
-								<div id="sortable" class="ui-sortable">
+							<div class="row" style="padding:15px;">
+								<div class="ui-sortable">
 									
-									<div id="inputfield" class="form-horizontal" style="height: 100%; float: left; width: 100%; margin-bottom:30px;" ng-repeat="phone in phones">
-										<div class="col-md-1 col-sm-1 col-xs-1">
-											<h2 id="71" style="margin:0; padding: 21px 0px;" class="glyphicon glyphicon-folder-close"></h2>
-										</div>
-										
-										<div class="col-md-11 col-sm-11 col-xs-11" style="padding:0; border:1px solid #ccc;">
-											<input type="hidden" value="" name="{{phone.type}}|{{phone.id}}|1" id="h1" class="id" />
-											<p id="html71" style="float:left; width:94.1%; margin: 0px 10px;">{{phone.name}}</p>
-											<button class="close" id="close" type="button" style="padding-right: 5px; padding-left: 5px;">
-												<span aria-hidden="true">×</span>
-												<span class="sr-only">Close</span>
-											</button>
+									<div class="col-md-12 ui-sortable-handle" style="padding: 0" id = "droppable">
+										<ul class="timeline col-md-12">
+											<li id="newli" class="col-md-12" style="padding: 0;">
+												<a value="0" data-target="#sectionname" data-toggle="modal" href="#sectionname" id = "namee" class="col-md-3" style="float: right; text-align: right; left: -75px; padding: 0px; text-decoration:none;">Section 1</a>
+												<hr class="timeline-badge" style="width: 30px; height: 1px; margin-left: 0px; left: 771px; background: #ccc" />
+												<div class="timeline-badge primary" ng-click = "active($event)"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></div>
+												<div class="timeline-panel addin" id="sortable">
+													
+												</div>
+											</li>
 											
-											<div class="col-md-12 col-xs-12 col-sm-12" style="border-top:1px solid #eee;">
-												<div class="col-md-4 col-xs-12 col-sm-12" style="border-right: 1px solid #ccc; padding: 0px;">
-													<h6 id="course_type51" class="text-left" style="float:left; padding: 7px">Visiblity :{{phone.visibility}}</h6>
-													<div id="course_type61" class="btn-group btn-group-xs" data-toggle="buttons" style="margin-bottom: 2px; float:left; padding:13px;">
-														<label class="btn btn-primary" ng-click = "visibility($event)">
-															<input type="radio" name="options1" id="option1" value="Active" autocomplete="off" style="width: 100%;"/> Active
-														</label>
-														
-														<label class="btn btn-primary active" ng-click = "visibility($event)">
-															<input type="radio" name="options1" id="option2" value="Draft" autocomplete="off" checked="" style="width: 100%;"/> Draft
-														</label>
-													</div>
+											<li id="first" class="col-md-12" style="height: 68px; padding:0;">
+												<a><h5 class="col-md-3" style="float: right; text-align: right; left: -75px; padding: 0px; margin-top: 32px;">Add</h5></a>
+												<div ng-click="newli()" class="timeline-badge danger" id="hov"><i class="glyphicon glyphicon-plus"></i></div>
+											</li>
+											
+											<li class="col-md-12" style="padding: 0;">
+												<a value="0" data-target="#sectionname" data-toggle="modal" href="#sectionname" id = "namee1" class="col-md-3" style="float: right; text-align: right; left: -75px; padding: 0px; text-decoration:none;">Instructor Content</a>
+												<hr class="timeline-badge" style="width: 30px; height: 1px; margin-left: 0px; left: 771px; background: #ccc" />
+												<div class="timeline-badge" ng-click = "active($event)"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></div>
+												<div class="timeline-panel" id="sortable">
+													
 												</div>
-												
-												<div class="col-md-5 col-xs-12 col-sm-12" style="border-right: 1px solid #ccc; padding-top:5px;">
-													<h6 class="text-left" style="float:left; padding: 6px">Validity</h6>
-													<div id="datepicker" class="input-daterange input-group col-sm-8" style="float:left; padding: 7px;">
-														<input type="text" id="start_date11" name="start1" class="input-sm form-control" ng-model = "startdate" ng-click = "start_click($event)" ng-change = "startdate1(startdate)"/>
-														<span class="input-group-addon">to</span>
-														<input type="text" name="end1" id="end_date11" class="input-sm form-control" ng-model = "enddate" ng-click = "end_click($event)" ng-change = "enddate1(enddate)"/>
-													</div>
+											</li>
+											
+											<li class="col-md-12" style="padding: 0;">
+												<a value="0" data-target="#sectionname" data-toggle="modal" href="#sectionname" id = "namee2" class="col-md-3" style="float: right; text-align: right; left: -75px; padding: 0px; text-decoration:none;">Resource Library</a>
+												<hr class="timeline-badge" style="width: 30px; height: 1px; margin-left: 0px; left: 771px; background: #ccc" />
+												<div class="timeline-badge" ng-click = "active($event)"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></div>
+												<div class="timeline-panel" id="sortable">
+													
 												</div>
-												
-												<div class="col-md-3 col-xs-12 col-sm-12" style="padding-top:5px; ">
-													<select name="content_prerequisite[1]" id="prerequisite1" ng-click="prerequisite_click($event)" ng-model = "prerequisite" ng-change = "prerequisite1(prerequisite)" class="form-control" style="float: left; width: 121px; padding:0px; margin-top: 6px;">
-														<option selected="selected" disabled="">--Prerequisite--</option>
-														<option value="None">None</option>
-														<option value="Just Above">Just Above</option>
-														<option value="All of the Above">All of the Above</option>
-														<option value="Locked">Locked</option>
-													</select>
-												</div>
-											</div>
-										</div>
+											</li>
+										</ul>
 									</div>
 									
 								</div>
@@ -325,6 +430,33 @@
 							</div>
 						</form> 
 
+						
+						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="sectionname" class="modal fade">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">
+											<span aria-hidden="true">×</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title">Edit Name</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-md-6">
+												<input id="ename" type="text" class="form-control" required="required" name="title" value="" />
+											</div>
+											<a id = "save" class="btn btn-primary content as"data-dismiss="modal" >Save</a>
+										</div>
+									</div>
+									
+									<div class="modal-footer">
+										<button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 						<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="document_modal" class="modal fade">
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
@@ -387,7 +519,7 @@
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-list-alt"></span>
 												</h2>
-												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" ng-click = "clip($event)">Introduction to the...</a>
+												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" >Introduction to the...</a>
 											</div>
 										</div>
 									</div>
@@ -417,70 +549,70 @@
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" ng-click = "clip($event)">Introduction to the...</a>
+												<a data-dismiss="modal" id="1" value="Introduction to the Incident Management." class="selecteddata" href="#" >Introduction to the...</a>
 											</div>
 											
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="2" value="Getting Started with the Incident Manage." class="selecteddata" href="#" ng-click = "clip($event)">Getting Started with...</a>
+												<a data-dismiss="modal" id="2" value="Getting Started with the Incident Manage." class="selecteddata" href="#" >Getting Started with...</a>
 											</div>
 											
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="3" value="Working with the Incident Management System." class="selecteddata" href="#" ng-click = "clip($event)">Working with the Inc...</a>
+												<a data-dismiss="modal" id="3" value="Working with the Incident Management System." class="selecteddata" href="#" >Working with the Inc...</a>
 											</div>
 											
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="4" value="Advanced Features of the Incident Manage." class="selecteddata" href="#" ng-click = "clip($event)">Advanced Features of...</a>
+												<a data-dismiss="modal" id="4" value="Advanced Features of the Incident Manage." class="selecteddata" href="#" >Advanced Features of...</a>
 											</div>
 											
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="5" value="Additional Tasks Performed by Using the." class="selecteddata" href="#" ng-click = "clip($event)">Additional Tasks Per...</a>
+												<a data-dismiss="modal" id="5" value="Additional Tasks Performed by Using the." class="selecteddata" href="#" >Additional Tasks Per...</a>
 											</div>
 											
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="6" value="Incident Browser and Reports." class="selecteddata" href="#" ng-click = "clip($event)">Incident Browser and...</a>
+												<a data-dismiss="modal" id="6" value="Incident Browser and Reports." class="selecteddata" href="#" >Incident Browser and...</a>
 											</div>
 
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="7" value="Insurance Contract Basics." class="selecteddata" href="#" ng-click = "clip($event)">Insurance Contract B...</a>
+												<a data-dismiss="modal" id="7" value="Insurance Contract Basics." class="selecteddata" href="#" >Insurance Contract B...</a>
 											</div>
 
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="8" value="Principles of General Insurance" class="selecteddata" href="#" ng-click = "clip($event)">Principles of Genera...</a>
+												<a data-dismiss="modal" id="8" value="Principles of General Insurance" class="selecteddata" href="#" >Principles of Genera...</a>
 											</div>
 
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="9" value="Course 1" class="selecteddata" href="#" ng-click = "clip($event)">Course 1</a>
+												<a data-dismiss="modal" id="9" value="Course 1" class="selecteddata" href="#" >Course 1</a>
 											</div>
 
 											<div class="col-md-3 text-center">
 												<h2 style="height:100px;">
 													<span style="margin-top: 38px;font-size: -webkit-xxx-large;" class="glyphicon glyphicon-folder-close"></span>
 												</h2>
-												<a data-dismiss="modal" id="10" value="Snapdeal Dress Code Policy" class="selecteddata" href="#" ng-click = "clip($event)">Snapdeal Dress Code...</a>
+												<a data-dismiss="modal" id="10" value="Snapdeal Dress Code Policy" class="selecteddata" href="#" >Snapdeal Dress Code...</a>
 											</div>
 
 										</div>
@@ -526,8 +658,8 @@
 			</div>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
 		  
@@ -592,9 +724,9 @@
 		
 		
 		<script src="js/jquery-ui.min.js"></script>
-		<script src="http://oss.maxcdn.com/summernote/0.5.1/summernote.min.js"></script>
+		<script src="js/summernote.min.js"></script>
 		<script src="js/bootstrap-datepicker.min.js"></script>
-		<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script src= "js/angular.min.js"></script>
 
 		
 		<script type="text/javascript">
@@ -614,133 +746,51 @@
 		<script>
 		
 			var comments = angular.module('comments', []);
-			comments.controller('commentsController', function($scope, $http, $element) {
+			var name = 2;
+			var section_id1 = 3;
+			
+			$(".row .col-md-3 .selecteddata").click(function() {
+			
+				var asset_type = $(this).parent().parent().parent().parent().parent().parent().attr('id');
+				var res = asset_type.split("_");
+				var asset_id = $(this).attr('id');
+				var id = $("div[id*='inputfield']").length;
+				var id2 = id + 1 ;
+				var asset_icon = $(this).parent().children().children().attr('class');
+				var asset_html = $(this).html();
 				
-				$scope.phones = [
-					{'name': 'Additional Tasks Performed by Using the Incident Management System',
-					 'visibility': 'Draft',
-					 'type': 'Scrompackage',
-					 'id': '1'}
-				];
-				
-				$('.modal').on('show.bs.modal', function (e) {
+					$( "<div id='inputfield' class='form-horizontal' style='height: 100%; float: left; width: 100%; margin-bottom:30px;'><div class='col-md-1 col-sm-1 col-xs-1'><h2 id='"+ asset_id + id2 +"' style='margin:0; padding: 21px 0px;' class='"+ asset_icon +"'></h2></div><div class='col-md-11 col-sm-11 col-xs-11' style='padding:0; border:1px solid #ccc;'><input type='hidden' value='' name='"+ res[0] + '|' + asset_id + '|' + id2 +"' id='h"+ id2  +"' class='id'><p id='html" + asset_id + id2 +"' style='float:left; margin: 0px 10px;'>"+ asset_html +"</p><button class='close' id='close' type='button' style='padding-right: 5px; padding-left: 5px;'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button><div class='col-md-12 col-xs-12 col-sm-12' style='border-top:1px solid #eee;'><div class='col-md-4 col-xs-12 col-sm-12' style='border-right: 1px solid #ccc; padding: 0px;'><h6 id='course_type5"+ id2 +"' class='text-left' style='float:left; padding: 7px'>Course Type : </h6><div id='course_type6"+ id2 +"' class='btn-group btn-group-xs'  data-toggle='buttons' style='margin-bottom: 2px; float:left; padding:13px;'><label class='btn btn-primary'><input type='radio' name='options1' id='option1' value='Active' autocomplete='off' /> Active</label><label class='btn btn-primary active'><input type='radio' name='options1' id='option2' value='Draft' autocomplete='off' checked /> Draft</label></div></div><div class='col-md-5 col-xs-12 col-sm-12' style='border-right: 1px solid #ccc; padding-top:5px;'><h6 class='text-left' style='float:left; padding: 6px'>Validity</h6><div id='datepicker' class='input-daterange input-group col-sm-8' style='float:left; padding: 7px;'><input type='text' id='start_date1"+ id2 +"' name='start1' class='input-sm form-control'/><span class='input-group-addon'>to</span><input type='text' name='end1' id='end_date1"+ id2 +"' class='input-sm form-control'></div></div><div class='col-md-3 col-xs-12 col-sm-12' style='padding-top:5px; '><select name='content_prerequisite[1]' id='prerequisite"+ id2 +"' class='form-control' style='float: left; width: 121px; padding:0px; margin-top: 6px;'><option selected='selected' disabled>--Prerequisite--</option><option value='None'>None</option><option value='Just Above'>Just Above</option><option value='All of the Above'>All of the Above</option><option value='Locked'>Locked</option></select></div></div></div></div>" ).appendTo( ".addin" );
+					$('#course_type5' + id2 ).html('Visiblity : ' + $("#course_type6" + id2 + " .active input").val());
+					
+					$("#course_type6" + id2 + " .btn").click(function() {
+						$('#course_type5' + id2 ).html('Visiblity : ' + $(this).children().val() );
+							console.log('Asset_Id : ' + asset_id + ', Asset_Type : ' + res[0] + ', Course Type : ' + $(this).children().val() );
+					});
+					
+					$('.input-daterange').datepicker({
+						format: "dd/mm/yyyy",
+						weekStart: 1,
+						todayBtn: true,
+						todayHighlight: true
+					});
+					
+					$('#start_date1' + id2 ).change(function () {
+						console.log('Asset_Id : ' + asset_id + ', Asset_Type : ' + res[0] + ', Start Date : ' + $('#start_date1' + id2 ).val());
+					});
+					
+					$('#end_date1' + id2 ).change(function () {
+						console.log('Asset_Id : ' + asset_id + ', Asset_Type : ' + res[0] + ', End Date : ' + $('#end_date1' + id2 ).val());
+					});
+					$('#prerequisite' + id2 ).change(function () {
+						console.log('Asset_Id : ' + asset_id + ', Asset_Type : ' + res[0] + ', Prerequisite : ' + $('#prerequisite' + id2 ).val());
+					});
+					
+					var asset_special_section = $("input[name*='" + res[0] + '|' + asset_id + '|' + id2 +"']").parent().parent().parent().parent().children().html();
+					console.log('res id : ' + asset_id + ', type : ' + res[0] + ', Course type : ' + $("#course_type6" + id2 + " .active input").val() + ', Rank: ' + id2 + ', Special Section: ' + asset_special_section );
 
-					selectedtype = $(this).attr('id').replace('_modal', '');
-					invoker = e.relatedTarget.id;
-					selectedsource = e.relatedTarget.classList;
-					
-					console.log(selectedtype);
-					console.log(invoker);
-					console.log(selectedsource);
-					
-					$scope.clip = function($event) {
-						
-						var asset_id_a = angular.element($event.target).attr('id');
-						
-						$http.post('').
-						success(function(data, status, headers, config) {
-						
-							console.log('1112');
-							$scope.phones.push({
-							
-								name: 'name',
-								visibility: 'Draft',
-								type: selectedtype,
-								id: asset_id_a
-							});
-							
-							$scope.visibility = function($event){
-							
-								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-								var res1 = res.split("|");
-								var asset_id = res1[1];
-								var asset_type = res1[0];
-								var visibility = angular.element($event.target).children().val();
-								console.log('Asset Type: ' + asset_type + ', Asset id: ' + asset_id + ', Visiblity : ' + visibility );
-								angular.element($event.target).parent().parent().parent().find('#course_type51').html('Visiblity : ' + visibility );
-							
-							}
-							
-							$scope.prerequisite_click = function($event){
-								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-								var res1 = res.split("|");
-								var asset_id = res1[1];
-								var asset_type = res1[0];
-								$scope.prerequisite1 = function(prerequisite){
-									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Prerequisite:- ' + prerequisite);
-								}
-							}
-							
-							$scope.start_click = function($event){
-								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-								var res1 = res.split("|");
-								var asset_id = res1[1];
-								var asset_type = res1[0];
-								$scope.startdate1 = function(startdate){
-									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Start Date:- ' + startdate);
-								}
-							}
-							
-							$scope.end_click = function($event){
-								var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-								var res1 = res.split("|");
-								var asset_id = res1[1];
-								var asset_type = res1[0];
-								$scope.enddate1 = function(enddate){
-									console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', End Date:- ' + enddate);
-								}
-							}
-						
-						}).
-						error(function(data, status, headers, config) {
-							console.log('3');
-						});
-					
-					}
-					
-				});
-				
-				$scope.visibility = function($event){
-				
-					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-					var res1 = res.split("|");
-					var asset_id = res1[1];
-					var asset_type = res1[0];
-					var visibility = angular.element($event.target).children().val();
-					console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Visiblity : ' + visibility );
-					angular.element($event.target).parent().parent().parent().find('#course_type51').html('Visiblity : ' + visibility );
-				
-				}
-				
-				$scope.start_click = function($event){
-					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-					var res1 = res.split("|");
-					var asset_id = res1[1];
-					var asset_type = res1[0];
-					$scope.startdate1 = function(startdate){
-						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Start Date:- ' + startdate);
-					}
-				}
-				
-				$scope.prerequisite_click = function($event){
-					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-					var res1 = res.split("|");
-					var asset_id = res1[1];
-					var asset_type = res1[0];
-					$scope.prerequisite1 = function(prerequisite){
-						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', Prerequisite:- ' + prerequisite);
-					}
-				}
-				
-				$scope.end_click = function($event){
-					var res = angular.element($event.target).parent().parent().parent().parent().find('input').attr('name');
-					var res1 = res.split("|");
-					var asset_id = res1[1];
-					var asset_type = res1[0];
-					$scope.enddate1 = function(enddate){
-						console.log('Asset Type: ' + asset_type + ', Asset ID: ' + asset_id + ', End Date:- ' + enddate);
-					}
-				}
+			});
+			
+			comments.controller('commentsController', function($scope, $http, $element, $compile) {
 				
 				$scope.change = function(){
 					console.log('End Date :- ' + $scope.confirmed);
@@ -753,51 +803,147 @@
 				$scope.course_type = function($event){
 					
 					var course_type = angular.element($event.target).children().val();
-					angular.element($event.target).parent().parent().parent().find('#course_type').html('Course Type : ' + course_type );
+					angular.element($event.target).parent().parent().parent().parent().find('#course_type').html('Course Type : ' + course_type );
 					console.log('Course Type : ' + course_type );
 				}
 				
 				$scope.visibility_course = function($event){
 					
 					var visibility_course = angular.element($event.target).children().val();
-					angular.element($event.target).parent().parent().parent().find('#course_type3').html('Visiblity : ' + visibility_course );
+					angular.element($event.target).parent().parent().parent().parent().find('#course_type3').html('Visiblity : ' + visibility_course );
 					console.log('Visiblity : ' + visibility_course );
 				}
 				
+				$scope.newli = function($event){
+				
+					$element.parent().find('#first').before($compile('<li class="col-md-12" style="padding: 0;"><a href="#sectionname" data-toggle="modal" data-target="#sectionname" value="0" style="float: right; text-align: right; left: -75px; padding: 0px; text-decoration:none;" class="col-md-3" id="namee'+ section_id1++ +'">Section '+ name++ +'</a><hr class="timeline-badge" style="width: 30px; height: 1px; margin-left: 0px; left: 771px; background: #ccc" /><div class="timeline-badge" ng-click = "active($event)"><i class="glyphicon glyphicon-chevron-left" style="color:white;"></i></div><div class="timeline-panel ui-sortable" id="sortable"></div></li>')($scope));
+					var c = [];
+					$(".timeline-panel").sortable({
+						connectWith: ".timeline-panel",
+						forcePlaceholderSize: true,
+						placeholder: "bg-success",
+						cursor: "move",
+						start: function(e, ui){
+							c = $(this).parent().children().html();
+						},
+						stop: function(e, ui){
+							size = $("div[id*='inputfield']").length;
+							var up = ui.item.children('.col-md-11').children().attr('name');
+							var res1 = up.split("|");
+							var new_section = ui.item.parent().parent().children().html();
+							console.log('Asset Type: ' + res1[0] + ', Asset ID: ' + res1[1] + ',  Special Section Old: ' + c + ',  Special Section New: ' + new_section + ', Old Rank: ' + res1[2]);
+							for (var j = 1; j < size+1; j++) {
+								var j1 = j-1;
+								oldid =$("div[id*='inputfield']").get(j1).children[1].children[0].name;
+								newid = oldid.replace(oldid.match(/[(0-9)]+/g),j);
+								var res = oldid.split("|");
+								var p = $("div[id*='inputfield']").get(j1) ;
+								var name = $("div[id*='inputfield']").get(j1).children[1].children[0] ;
+								$(name).attr('name',res[0] + '|' + res[1] +'|' + j);
+								var asset_special_section_new = $(p).parent().parent().children().html();
+								console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j + ', Special Section New: ' + asset_special_section_new);
+								
+							}
+						}
+					});
+					
+					var section_id = section_id1-1;
+					$('#sectionname').on('show.bs.modal', function (e) {
+
+						selectedtype = $(this).attr('id').replace('modal', '');
+						invoker = e.relatedTarget.id;
+						selectedsource = e.relatedTarget.classList;
+						
+						$('#save').click(function() {
+							$('#' + invoker).html($(this).parent().children().children().val());
+							console.log('ID: ' + invoker + ', New Name: ' + $(this).parent().children().children().val());
+						
+						});
+
+					});
+					
+				}
+				
+				$scope.active = function($event){
+				
+					$element.parent().find('.addin').removeClass( "addin" );
+					$element.parent().find('.primary').removeClass( "primary" );
+					angular.element($event.target).parent().find('.timeline-panel').addClass( "addin" );
+					angular.element($event.target).addClass( "primary" );
+				
+				}
 			});
 			
-			$("#sortable").sortable({
+			var c = [];
+			$(".timeline-panel").sortable({
+				connectWith: ".timeline-panel",
 				forcePlaceholderSize: true,
 				placeholder: "bg-success",
 				cursor: "move",
-				stop: function(){
-					size = $(this).parent().children("#sortable").children().size();
+				start: function(e, ui){
+					c = $(this).parent().children().html();
+				},
+				stop: function(e, ui){
+					size = $("div[id*='inputfield']").length;
+					var up = ui.item.children('.col-md-11').children().attr('name');
+					var res1 = up.split("|");
+					var new_section = ui.item.parent().parent().children().html();
+					console.log('Asset Type: ' + res1[0] + ', Asset ID: ' + res1[1] + ',  Special Section Old: ' + c + ',  Special Section New: ' + new_section + ', Old Rank: ' + res1[2]);
 					for (var j = 1; j < size+1; j++) {
-						position= 'div'+':nth-child('+j+')';
-						oldid =$('#sortable').children(position).find('.id').attr('name');
-						newid = oldid.replace(oldid.match(/[(0-9)]+/g),j);
+						var j1 = j-1;
+						oldid =$("div[id*='inputfield']").get(j1).children[1].children[0].name;
 						var res = oldid.split("|");
-						$("#sortable").children(position).find('.id').attr('name',newid);
-						$("#sortable").children(position).find('.id').attr('name',res[0] + '|' + res[1] +'|' + j);
-						console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j);
+						var name = $("div[id*='inputfield']").get(j1).children[1].children[0] ;
+						$(name).attr('name',res[0] + '|' + res[1] +'|' + j);
+						var asset_special_section_new = $(p).parent().parent().children().html();
+						console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j + ', Special Section New: ' + asset_special_section_new);
+						
 					}
 				}
 			});
+
+			
 			
 			$(document).on("click", "#close", function(){
-				$(this).parents('#inputfield').remove();
-				size = $('#sortable').children().size();      //This is awesome
+				var up = $(this).parent().children().attr('name');
+				var res1 = up.split("|");
+				console.log('Asset Type: ' + res1[0] + ', Asset ID: ' + res1[1] + ', Old Rank : ' + res1[2]);
 				
-				for (var j = 1; j < size+1; j++) {
-					position= 'div'+':nth-child('+j+')';
-					oldid =$('#sortable').children(position).find('.id').attr('name');
-					newid = oldid.replace(oldid.match(/[(0-9)]+/g),j);
+				$(this).parents('#inputfield').remove();
+				size = $("div[id*='inputfield']").length;
+				for (var i = 1; i < size+1; i++) {
+					var i1 = i-1;
+					oldid =$("div[id*='inputfield']").get(i1).children[1].children[0].name;
 					var res = oldid.split("|");
-					$("#sortable").children(position).find('.id').attr('name',res[0] + '|' + res[1] +'|' + j);
-					console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + j);
+					var name = $("div[id*='inputfield']").get(i1).children[1].children[0] ;
+					$(name).attr('name',res[0] + '|' + res[1] +'|' + i);
+					console.log('Asset Type: ' + res[0] + ', Asset ID: ' + res[1] + ', New Rank : ' + i);
 				}
 			});
 			
+			$("#showh").click(function() {
+			
+				$(this).parent().siblings('#rowr').show('fast');
+				$(this).parent().css('display', 'none');
+			
+			});
+			
+			$('#sectionname').on('show.bs.modal', function (e) {
+
+				selectedtype = $(this).attr('id').replace('modal', '');
+				invoker = e.relatedTarget.id;
+				selectedsource = e.relatedTarget.classList;
+				
+				$('#save').click(function() {
+				
+					$('#' + invoker).html($(this).parent().children().children().val());
+					console.log('ID: ' + invoker + ', New Name: ' + $(this).parent().children().children().val());
+					
+				});
+
+			});
+     
+
 			
 		</script>
 
