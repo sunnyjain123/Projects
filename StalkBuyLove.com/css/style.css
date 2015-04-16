@@ -1,0 +1,38 @@
+.container-top-header{
+	background:#645D54;
+}
+.header-h3-color{
+	color:white; 
+	margin:8px;
+}
+body{
+    background-color: white;
+    font-family: 'Open Sans', Arial;
+}
+.form-search-input{
+	border-radius:0px;
+	box-shadow:none;
+	border:1px solid black;
+	text-align:center;
+	color:black;
+}
+.form-search-button{
+	background:white;
+	border:1px solid black;
+	border-radius:0px;
+	top:0px;
+	color:black;
+}
+.border-none-thumbnail{
+	border: none !important; 
+}
+
+.navbar-nav .active{
+	color:white !important;
+	background:#DF938F;
+}
+.navbar-nav > li > a {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align:center;
+}
